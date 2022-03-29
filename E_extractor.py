@@ -1,35 +1,10 @@
-"""
-import os
-import re
-
-path = "C:/Users/pc/Downloads/Compressed/HI_candidates/NitarandaAlexander__CV.docx"
-print(os.listdir(path))
-
-
-def pathOpener(filePath):
-    for x in os.listdir(filePath):
-        try:
-            opener = open(filePath + x)
-        except PermissionError:
-            continue
-        print(opener)
-        return opener
-
-
-pathOpener(path)
-
-
-with open("C:/Users/pc/Downloads/Compressed/HI_candidates/NitarandaAlexander__CV.docx") as file:
-    for email in file:
-        str.encode(email)
-        print(email.split('@'))
-"""
 import re
 import docx
 import os
 
 
 def extractor(folder_path):
+    # this function matches all email formats
     def readtextdoc(path):
         doc = docx.Document(path)
 
@@ -55,17 +30,17 @@ def extractor(folder_path):
                 return i
 
     ans = str(first_match(matches).group(0))
-    return ans+";\n"
+    return ans + ";\n"
 
 
-# extractor("C:/Users/pc/OneDrive/Desktop/CV/Assumpta Akuoma Onuoha.docx")
+#
 
 folder = "C:/Users/pc/OneDrive/Desktop/CV/"
 for filename in os.listdir(folder):
     if os.path.isfile(folder + filename):
         if filename.endswith(".docx"):
             try:
-                with open("resume.txt", "a")  as r:
+                with open("resume.txt", "a") as r:
                     r.write(extractor(folder + filename))
             except AttributeError:
                 continue
